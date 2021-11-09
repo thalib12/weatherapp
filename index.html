@@ -10,100 +10,99 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap" rel="stylesheet">
     <style>
-        a{
-          
-         font-weight: 500;
-         font-family: 'Zen Antique Soft', serif;
-         padding: auto;
-        
-        }
-        
-        
-        a:hover{
-          color: rgb(16, 247, 8);
-          font-weight: bold;
-        }
-        
-        h3{
-      color: white;
-      margin-right: 20px;
-      
-      margin-left: 40%;
-        }
-        .btn-shine {
-        transform: translate(-50%, -50%);
-        
-        color: #fff;
-        background: linear-gradient(to right, #4d4d4d 0, #fff 10%, #4d4d4d 20%);
-        background-position: 0;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: shine 3s infinite linear;
-        animation-fill-mode: forwards;
-        
-        font-weight: 600;
-        font-size: 20px;
-        text-decoration: none;
-        white-space: nowrap;
-        margin-left: 50%;
-        margin-top: 30px;
-      }
-      @-moz-keyframes shine {
-        0% {
-          background-position: 0;
-        }
-        60% {
-          background-position: 280px;
-        }
-        100% {
-          background-position: 280px;
-        }
-      }
-     
-
-      @keyframes shine {
-        0% {
-          background-position: 0;
-        }
-        60% {
-          background-position: 230px;
-        }
-        100% {
-          background-position: 230px;
-        }
-      }
+       .shimmer {
+  font-family: 'Zen Antique Soft', serif;
+  font-weight: 300;
+  font-size: 1.5em;
+  margin: 0 auto;
+  padding: 0 140px 0 0;
+  display: inline;
+  margin-bottom: 0;
+}
+.shimmer {
+  text-align: center;
+  color: rgba(255,255,255,0.1);
+  background: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+  background: -moz-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+  background: gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+  -webkit-background-size: 125px 100%;
+  -moz-background-size: 125px 100%;
+  background-size: 125px 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  -webkit-animation-name: shimmer;
+  -moz-animation-name: shimmer;
+  animation-name: shimmer;
+  -webkit-animation-duration: 2s;
+  -moz-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: #222;
+}
+@-moz-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+@-webkit-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+@-o-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
      
       
         
       </style>
 </head>
 <body style="background-image: url(./bg1.jpg);">
-    <nav class="navbar navbar-expand-lg navbar-light " id="navb" style=" background-color:black;height: 60px;"><a href="" class="btn-shine " target="_blank">CITY WEATHER DETAILS</a></nav>
+    <nav class="navbar navbar-expand-lg navbar-light " id="navb" style=" background-color:black;height: 60px;"><h1 class="shimmer">WEATHER FORECAST</h1></nav>
     <nav class="navbar navbar-expand-lg navbar-light " id="navb" style="background-color: rgb(228, 212, 212);height: 50px;">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
            
                  <input class="form-control" type="text" placeholder="Enter City Name"
-                         aria-label="Search" style="width:600px;margin-left: 28%;" id="city" aria-required="" >
+                         aria-label="Search" style="width:50%;margin-left: 25%;" id="city" aria-required="" >
                      <button class="btn" onclick="fetchWheather()"
-                         style="width:10%  ; background-color:rgb(58, 57, 57);color: rgb(250, 249, 249);margin-left: -50px;">
+                         style="width:25%  ; background-color:rgb(58, 57, 57);color: rgb(250, 249, 249);">
                              Fetch</button>
 
                  
-             </div>
+             
              </nav>
-    <div class="container">
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4">
-              
-                <!-- <input type="text" placeholder="Enter city name" id="city">
-                <button class="btn btn-success btn-sm" >FETCH</button> -->
+   
+              <center>
+               
                 <div id="result" style="margin-top: 100px;text-transform: uppercase;color: white;font-weight: bold;"></div>
-                   <center> <div id="icon"></div></center>
+                    <div id="icon"></div>
             </div>
-            <div class="col-4"></div>
-        </div>
-    </div>
+          </center>
+           
     
 </body>
 <script>
@@ -119,16 +118,16 @@
         let weather_type=data["weather"][0].main
         let wind_speed=data["wind"].speed
         if(weather_type=="Clouds"){
-            document.querySelector("#icon").innerHTML=`<img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" srcset="">`
+            document.querySelector("#icon").innerHTML=`<img src="./cloud.png" alt="" srcset="">`
         }
         else if(weather_type=="Rain"){
-            document.querySelector("#icon").innerHTML=`<img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" srcset="">`
+            document.querySelector("#icon").innerHTML=`<img src="./rain.png" alt="" srcset="">`
         }
         else if(weather_type=="Mist"){
-            document.querySelector("#icon").innerHTML=`<img src="http://openweathermap.org/img/wn/03d@2x.png" alt="" srcset="">`
+            document.querySelector("#icon").innerHTML=`<img src="./mist.png" alt="" srcset="">`
         }
         else if(weather_type=="Drizzle"){
-            document.querySelector("#icon").innerHTML=`<img src="http://openweathermap.org/img/wn/09d@2x.png" alt="" srcset="">`
+            document.querySelector("#icon").innerHTML=`<img src="./drizzle.png" alt="" srcset="">`
         }
 //         disp=`<div class="card" style="width:390px;background-color:black;color:white;">
 //   <div class="card-body">
