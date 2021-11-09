@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+    
+</head>
+<body style="background-image: url(./bg1.jpg);">
+    <nav class="navbar navbar-expand-lg navbar-light " id="navb" style=" background-color:rgb(58, 57, 57);height: 60px;"><h3 style="color: white; 
+
+        font-family: 'Crimson Text', serif;margin-left:43%;" >CITY WEATHER</h3></nav>
+    <nav class="navbar navbar-expand-lg navbar-light " id="navb" style="background-color: rgb(228, 212, 212);height: 50px;">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           
+                 <input class="form-control" type="text" placeholder="Enter City Name"
+                         aria-label="Search" style="width:600px;margin-left: 28%;" id="city" aria-required="" >
+                     <button class="btn" onclick="fetchWheather()"
+                         style="width:10%  ; background-color:rgb(58, 57, 57);color: rgb(250, 249, 249);margin-left: -50px;">
+                             Fetch</button>
+
+                 
+             </div>
+             </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+               
+                <!-- <input type="text" placeholder="Enter city name" id="city">
+                <button class="btn btn-success btn-sm" >FETCH</button> -->
+                <div id="result" style="margin-top: 100px;text-transform: uppercase;color: white;font-weight: bold;"></div>
+                   <center> <div id="icon"></div></center>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+    
+</body>
+<script>
+    function fetchWheather(){
+        let cityname=city.value
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=5c7390b0879cd70b1a16ec18b39aa3b4&units=metric `).then(res=>res.json()).then(data=>populateValues(data))
+    }
+    function populateValues(data){
+        let disp=``
+        let location=data.name
+        let temperature=data["main"].temp
+        let weather_type=data["weather"][0].main
+        let wind_speed=data["wind"].speed
+        if(weather_type=="Clouds"){
+            document.querySelector("#icon").innerHTML=`<img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" srcset="">`
+        }
+        else if(weather_type=="Rain"){
+            document.querySelector("#icon").innerHTML=`<img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" srcset="">`
+        }
+        else if(weather_type=="Mist"){
+            document.querySelector("#icon").innerHTML=`<img src="http://openweathermap.org/img/wn/03d@2x.png" alt="" srcset="">`
+        }
+        else if(weather_type=="Drizzle"){
+            document.querySelector("#icon").innerHTML=`<img src="http://openweathermap.org/img/wn/09d@2x.png" alt="" srcset="">`
+        }
+//         disp=`<div class="card" style="width:390px;background-color:black;color:white;">
+//   <div class="card-body">
+//     <h5 class="card-title">WEATHER DETAILS</h5>
+    
+//   </div>
+//   <ul class="list-group list-group-flush">
+//     <li class="list-group-item">City Name : ${location}</li>
+//     <li class="list-group-item">Temperature : ${temperature} °C</li>
+//     <li class="list-group-item">Weather Type : ${weather_type}</li>
+//     <li class="list-group-item">Wind Speed : ${wind_speed}</li>
+//     </ul>
+// </div>`
+disp=`<center><h4>${location}</h4>
+    <h1>${temperature}°C</h1>
+    <p>Wind Speed : ${wind_speed} KM/H</p>
+    <p>Wind Type : ${weather_type}
+    </center>`
+document.querySelector("#result").innerHTML=disp
+    }
+</script>
+</html>
